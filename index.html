@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MessyFox - Obfuscation Browser</title>
+    <style>
+        /* 
+         * DESIGN SYSTEM: Dark Mode, Clean, Trusted
+         */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --border-color: #333333;
+            --accent-color: #ffffff; 
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --max-width: 680px;
+            --spacing-unit: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* HEADER */
+        header {
+            padding: 4rem 0 2.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the container itself */
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .main-logo {
+            width: 90px;
+            height: 90px;
+            filter: invert(1); 
+            /* FIX: Added margin: 0 auto to center the block-level image */
+            margin: 0 auto 1rem auto; 
+            display: block;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .based-on {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        /* BUTTONS */
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+        }
+
+        /* SECTIONS */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #d4d4d8;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+        }
+        
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .do-list li::before {
+            content: "→";
+            margin-right: 10px;
+            color: var(--text-muted);
+        }
+
+        .dont-list li::before {
+            content: "–";
+            margin-right: 10px;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: var(--spacing-unit) 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.25rem;
+        }
+
+        /* Row 1: Logo + Project Name */
+        .footer-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .footer-logo {
+            width: 24px;
+            height: 24px;
+            filter: invert(1);
+            display: block;
+        }
+
+        .footer-project-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        /* Row 2: Links */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem; 
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+            text-decoration: underline;
+        }
+
+        /* Row 3: Copyright */
+        .copyright {
+            font-size: 0.75rem;
+            color: #52525b;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <!-- Logo is now perfectly centered using margin: 0 auto -->
+            <img src="logo.png" alt="MessyFox Logo" class="main-logo">
+            
+            <!-- Brand Name -->
+            <div class="brand-name">MESSYFOX</div>
+            
+            <!-- Subtitle -->
+            <span class="based-on">BASED ON FIREFOX</span>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="hero">
+            <h1>
+If you can’t hide your data,<br>
+<strong>poison it.</strong>
+</h1>
+        </section>
+
+        <div class="cta-group">
+            <a href="#" class="btn btn-secondary">View on GitHub</a>
+            <a href="#" class="btn btn-primary">Download (Alpha)</a>
+        </div>
+
+        <section>
+            <h2>Why MessyFox?</h2>
+            <p>Tracking is everywhere and we at MessyFox believe, that REAL privacy is not possible anymore; obfuscation is.</p>
+        </section>
+
+        <section>
+            <h2>What does MessyFox do?</h2>
+            <ul class="do-list">
+                <li>A stripped-down version of Firefox.</li>
+                <li>Poisons your data with automated fake queries/searches.</li>
+                <li>Rotates device fingerprints</li>
+                <li>Fully free and open-source</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What does MessyFox NOT do?</h2>
+            <ul class="dont-list">
+                <li>Does not hide your IP</li>
+                <li>Does not replace a VPN</li>
+                <li>Does not guarantee full anonymity</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand-row">
+                <img src="https://z-cdn-media.chatglm.cn/files/9a6b72e0-0e91-4330-9692-b75553f37c90.png?auth_key=1870468273-5b7de466735547bdbc3cc6c4f505f9b7-0-b58679ceeb6be57033a19c19c2a61007" alt="MessyFox Logo Small" class="footer-logo">
+                <span class="footer-project-name">PROJECT MESSYFOX</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">GITHUB</a>
+                <a href="#">CONTACT</a>
+            </div>
+            
+            <div class="copyright">
+                2025
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
